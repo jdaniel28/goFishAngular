@@ -1,0 +1,29 @@
+<title>Document</title>
+
+
+
+<div class="container-fluid" style="background-color:#353a40;">
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <a href="#" class="navbar-brand" id="navLi">Go Fish</a>
+        <button type="button" class="navbar-toggler" data-bs-toggle="collapse" (click)="isShown = !isShown"
+            data-bs-target="#navbarNav" aria-expanded="false" aria-controls="navbarNav"><span
+                class="navbar-toggler-icon"></span></button>
+
+        <div class="navbar-collapse collapse flex-row-reverse" [ngClass]="{ 'show': isShown }" id="navbarNav">
+            <ul class="navbar-nav ">
+                <li style="color:white;" class="nav-item">
+                    <a routerLink="about" (click)="isShown = false" class="nav-link">About</a>
+                </li>
+                <li style="color:white;" class="nav-item">
+                    <a routerLink="host" (click)="isShown = false" class="nav-link">Host</a>
+                </li>
+                <li style="color:white;" class="nav-item">
+                    <a routerLink="join" (click)="isShown = false" class="nav-link">Join</a>
+                </li>
+                <li style="color:white;" class="nav-item">
+                    <a routerLink="play" (click)="isShown = false" class="nav-link">Play</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>

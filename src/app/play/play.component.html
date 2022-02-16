@@ -1,0 +1,87 @@
+<br />
+<br />
+<div class="d-flex justify-content-center" *ngIf="!gameStarted">
+    <button type="button" class="btn btn-outline-primary btn-lg" (click)="onPlay()">Play</button>
+</div>
+<div *ngIf="gameStarted">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">Player</th>
+                <th scope="col">Cards</th>
+                <th>Sets Declared</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let playerDetail of playerDetails; let i = index">
+                <th scope="row" [ngClass]="{'bgDark': i == currentTurn}">{{i+1}}</th>
+                <td [ngClass]="{'bgDark': i == currentTurn}">{{playerDetail.playerName}}</td>
+                <td [ngClass]="{'bgDark': i == currentTurn}">{{playerDetail.numCard}}</td>
+                <td [ngClass]="{'bgDark': i == currentTurn}">{{decksDeclaredPlayersNum[i]}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="item d-flex justify-content-center">
+        <span>Sets Declared : {{decksDeclared}}</span>
+    </div>
+    <div class="item d-flex justify-content-center">
+        <span *ngFor="let decksDeclaredString of decksDeclaredStrings">| {{decksDeclaredString}} |</span>
+    </div>
+    <br />
+    <br />
+    <div class="item d-flex justify-content-center">
+        <span>Log : {{logString}}</span>
+    </div>
+    <div class="item d-flex justify-content-center">
+        <div class="hand" [ngClass]="{'hhand-compact' : !isExpanded,'hhand' : isExpanded}">
+            <img class='card' *ngFor="cardDetail of cardDetails; let i = index" [src]="cardDetails[i]">
+        </div>
+    </div>
+    <br />
+    <div class="d-flex justify-content-center">
+        <button class="btn  btn-outline-secondary" (click)="onExpandCollapse()">{{buttonText}}</button>
+    </div>
+    <br />
+    <div class=" d-flex justify-content-center">
+        <div>
+            <button class="btn btn-outline-primary btn-primary-spacing" (click)="onAsk()">Ask</button>
+            <button class="btn btn btn-outline-success btn-primary-spacing" (click)="onDeclare()">Declare</button>
+        </div>
+    </div>
+    <div *ngIf="askEnabled" class="d-flex justify-content-center">
+        <div class="hand hhand">
+            <a *ngFor="let card of cardDetails"><img *ngIf="card != 'assets/svg/WE.svg'" class='card' href="#"
+                    [src]="card" (click)="askDeck(card)"></a>
+        </div>
+    </div>
+    <div *ngIf="sameDeckVisible">
+        <div class="d-flex justify-content-center">
+            <span class="span">{{askCardConfirm}}</span>
+        </div>
+        <div class="d-flex justify-content-center">
+            <ng-container *ngFor="let playerDetail of playerDetails; let i = index;">
+                <button class="btn btn-outline-secondary btn-primary-spacing"
+                    *ngIf="i != thisPlayer-1 && playerDetail.numCard !=0"
+                    (click)="askCard(i+1)">{{playerDetail.playerName}}</button>
+            </ng-container>
+        </div>
+    </div>
+    <div *ngIf="confirmAsk && thisPlayer-1 == currentTurn" class="d-flex justify-content-center">
+        <button class="btn btn-outline-primary btn-primary-spacing" (click)="confirmAskBtn()">Confirm</button>
+    </div>
+    <div *ngIf="declareEnabled" class="d-flex justify-content-center">
+        <div class="hand hhand">
+            <a *ngFor="let card of cardDetails"><img class='card' href="#" [src]="card" (click)="declareDeck(card)"></a>
+        </div>
+    </div>
+    <div *ngIf="declareConfirmCheck  && thisPlayer -1 == currentTurn">
+        <div class="d-flex justify-content-center">
+            <span class="span">{{declareDeckConfirm}}</span>
+        </div>
+        <br />
+        <div class="d-flex justify-content-center">
+            <button class="btn btn btn-outline-success btn-primary-spacing" (click)="declareConfirm()">Confirm</button>
+        </div>
+    </div>
+</div>
