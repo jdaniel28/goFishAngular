@@ -9,7 +9,7 @@ import { PlayerTurn } from '../Types/PlayerTurn';
 })
 export class GameService {
 
-  url: string = "http://localhost:8090/"
+  url: string = "http://localhost:9090/"
   model: Game = {
     roomId: "",
     numPlayers: 0,

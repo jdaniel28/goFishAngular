@@ -16,6 +16,8 @@ import { flatMap, fromEvent, interval, map, mapTo, Observable, startWith, switch
 })
 export class PlayComponent implements OnInit {
 
+  personSelected = '';
+  isPersonSelected: boolean = false;
   decksDeclaredPlayersNum: number[] = [];
   thisPlayer: number = 0;
   currentTurn: number = 0;
@@ -125,6 +127,8 @@ export class PlayComponent implements OnInit {
   askCard(player: number) {
     this.playerAsked = player;
     this.confirmAsk = true;
+    this.isPersonSelected = true;
+    this.personSelected = this.playerDetails[this.playerAsked - 1].playerName;
   }
   confirmAskBtn() {
     var card: string = this.cardService.getAbbSetName(this.askCardConfirm);

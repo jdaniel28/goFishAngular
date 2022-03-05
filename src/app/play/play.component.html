@@ -57,7 +57,7 @@
     </div>
     <div *ngIf="sameDeckVisible">
         <div class="d-flex justify-content-center">
-            <span class="span">{{askCardConfirm}}</span>
+            <span class="span">{{askCardConfirm}}<p *ngIf="isPersonSelected"> from {{personSelected}}</p></span>
         </div>
         <div class="d-flex justify-content-center">
             <ng-container *ngFor="let playerDetail of playerDetails; let i = index;">
